@@ -1,5 +1,5 @@
 Reward learning code makes use of the companion code of the following publication:  
-E Bıyık, D Sadigh. **"Batch Active Preference-Based Learning of Reward Functions"**. *Conference on Robot Learning (CoRL)*, Zurich, Switzerland, Oct. 2018.
+E Bıyık, D Sadigh. **"[Batch Active Preference-Based Learning of Reward Functions](https://arxiv.org/abs/1810.04303)"**. *Conference on Robot Learning (CoRL)*, Zurich, Switzerland, Oct. 2018.
 
 ## Dependencies
 You need to have the following libraries with [Python3](http://www.python.org/downloads):
