@@ -6,11 +6,21 @@ from scipy.spatial import ConvexHull
 import dpp_sampler
 
 def func_psi(psi_set, w_samples):
+    M = w_samples.shape[0]
     y = psi_set.dot(w_samples.T)
-    term1 = np.sum(1.-np.exp(-np.maximum(y,0)),axis=1)
-    term2 = np.sum(1.-np.exp(-np.maximum(-y,0)),axis=1)
-    f = -np.minimum(term1,term2)
+    prob = 1. / (1 + np.exp(y))
+    term1 = np.sum(prob * np.log2(M * prob / prob.sum(axis=1,keepdims=True)), axis=1)
+    prob = 1 - prob
+    term2 = np.sum(prob * np.log2(M * prob / prob.sum(axis=1,keepdims=True)), axis=1)
+    f = -(term1 + term2) / M
     return f
+    
+    # Below is for the volume removal based method
+    #y = psi_set.dot(w_samples.T)
+    #term1 = np.sum(1.-np.exp(-np.maximum(y,0)),axis=1)
+    #term2 = np.sum(1.-np.exp(-np.maximum(-y,0)),axis=1)
+    #f = -np.minimum(term1,term2)
+    #return f
 
 def generate_psi(simulation_object, inputs_set):
     z = simulation_object.feed_size
